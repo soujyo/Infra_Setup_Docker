@@ -1,9 +1,17 @@
+
 provider "google" {
-  //credentials = file("serviceaccount.json")
+  credentials = file("serviceaccount.json")
   project = "custom-helix-275804"
   region = "asia-northeast3"
   zone = "asia-northeast3-c"
 }
+
+terraform {
+  backend "local" { path = "./volume/tfstates/terraform.tfstate" }
+}
+
+
+
 
 //resource "google_compute_instance" "vm_instance-b" {
 //  machine_type = "f1-micro"
@@ -24,7 +32,7 @@ provider "google" {
 
 resource "google_compute_instance" "vm_instance-a" {
   machine_type = "f1-micro"
-  name = "ekstep-terraform-instance-infra_pipeline"
+  name = "ekstep-terraform-instance-infra-pipeline"
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-9"
